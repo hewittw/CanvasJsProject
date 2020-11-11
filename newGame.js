@@ -16,6 +16,39 @@ console.log(start);
 
 // functions start here
 
+function myKeyDown (event) {
+  /*
+    Parameters: event object, which contains information about the event
+      that triggered the event listener.
+    Returns: None, but modifies global variables which track response to event.
+    Purpose: Make the animation respond to keys being pressed.
+  */
+  // One of the attributes of the event object is 'which,' contains the key
+  //   that was pressed to trigger the event listener.
+  keyCode = event.which;
+  keyStr = event.key;
+  console.log(event);
+  console.log(keyCode);
+  console.log(keyStr);
+
+  if (keyStr == 'w') {
+    // Move circle up
+    circleVel[1] -= 10;
+  }
+  if (keyStr == 'a') {
+    // Move circle left
+    circleVel[0] -= 10;
+  }
+  if (keyStr == 's') {
+    // Move circle down
+    circleVel[1] += 10;
+  }
+  if (keyStr == 'd') {
+    // Move circle right
+    circleVel[0] += 10;
+  }
+}
+
 function drawAll()
 /*
   Purpose: This is the main drawing loop.
@@ -63,15 +96,23 @@ function drawAll()
     // console.log(lineChange);
   }
 
-// circle change if statements
+   //stopping circle from moving too fast
+   if (circleVel[1] > 50) {
+     circleVel[1] = 1
+   }
+   if (circleVel[0] > 50) {
+     circleVel[0] = 1
+   }
+
+  // circle change if statements
   if ((circlePos[0] > canvas.width) || (circlePos[0] < 0)) {
     circleVel[0] *= -1;
-    circleVel[0] += Math.random() - 0.5;
+    //circleVel[0] += Math.random() - 0.5;
     console.log(circleVel);
   }
   if ((circlePos[1] > canvas.height) || (circlePos[1] < 0)) {
     circleVel[1] *= -1;
-    circleVel[1] += Math.random() - 0.5;
+    //circleVel[1] += Math.random() - 0.5;
     console.log(circleVel);
   }
 
@@ -124,9 +165,13 @@ canvas.style.border = "1px solid black";
 // Set up the context for the animation
 context = canvas.getContext("2d");
 
+// draw circle
 context.beginPath();
 context.arc(95, 50, 40, 0, 2 * Math.PI);
 context.stroke();
+
+// set up listner and stuff for key events
+document.addEventListener("keydown", myKeyDown);
 
 // Fire up the animation engine
 window.requestAnimationFrame(drawAll);
