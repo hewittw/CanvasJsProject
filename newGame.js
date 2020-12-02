@@ -33,19 +33,19 @@ function myKeyDown (event) {
 
   if (keyStr == 'w') {
     // Move circle up
-    circleVel[1] -= 10;
+    circleVel[1] -= 5;
   }
   if (keyStr == 'a') {
     // Move circle left
-    circleVel[0] -= 10;
+    circleVel[0] -= 5;
   }
   if (keyStr == 's') {
     // Move circle down
-    circleVel[1] += 10;
+    circleVel[1] += 5;
   }
   if (keyStr == 'd') {
     // Move circle right
-    circleVel[0] += 10;
+    circleVel[0] += 5;
   }
 }
 
@@ -163,7 +163,8 @@ canvas.height = windowHeight - 20;
 canvas.style.border = "1px solid black";
 
 // Set up the context for the animation
-context = canvas.getContext("2d");
+context = canvas.getContext("2d"); // object that let's us work with we the canvas
+//ask dad about this and why this can't be in a function
 
 // draw circle
 context.beginPath();
