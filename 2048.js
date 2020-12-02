@@ -14,8 +14,9 @@ cell_0_0 = document.getElementById(“cell_0_0”); 
 // Global Variables
 
 
-// Class Definitions - probably in another file
-
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
 
 // Functions
 
@@ -37,16 +38,25 @@ function drawAll()
   window.requestAnimationFrame(drawAll);
 }
 
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+// Main
+
+// Setting up Canvas and what not
+canvas = document.getElementById("mainCanvas");
 // Set up the canvas and context objects
-context = setUpContext();
+context = canvas.getContext("2d");
 
-document.addEventListener("keydown", myKeyDown);
+//document.addEventListener("keydown", myKeyDown); // FIX THIS LATER
 
+/******************************************************************************/
+
+// Actual Code with classes / real main starts here
 // Create instance of Tile object
 tile1 = new Tile(0, 0);
 tileList = [tile1];
 
 // Fire up the animation engine
 window.requestAnimationFrame(drawAll);
-
-// Main
