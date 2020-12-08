@@ -14,7 +14,7 @@ cell_0_0 = document.getElementById(“cell_0_0”); 
 // Global Variables
 var board1 = new Board(4);
 console.log(board1.getBoard());
-board1.intializeBoard();
+board1.intializeBoard(4);
 console.log(board1);
 board1.moveDown();
 console.log(board1);
@@ -23,6 +23,22 @@ console.log(board1);
 /******************************************************************************/
 
 // Functions
+function myKeyDown (event) {
+  /*
+    Parameters: event object, which contains information about the event
+      that triggered the event listener.
+    Returns: None, but modifies global variables which track response to event.
+    Purpose: Make the animation respond to keys being pressed.
+  */
+  // One of the attributes of the event object is 'which,' contains the key
+  //   that was pressed to trigger the event listener.
+  keyCode = event.which;
+  keyStr = event.key;
+  console.log(event);
+  console.log(keyCode);
+  console.log(keyStr);
+  board1.move(keyStr);
+}
 
 function drawAll()
 /*
@@ -61,7 +77,7 @@ context = canvas.getContext("2d");
 //tile1 = new Tile(0, 0);
 //tileList = [tile1];
 
-
+document.addEventListener("keydown", myKeyDown);
 
 // Fire up the animation engine
 window.requestAnimationFrame(drawAll);

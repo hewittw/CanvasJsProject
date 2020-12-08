@@ -1,3 +1,9 @@
+// To do's
+// fix the intializeBoard function
+// get the random function in square working
+// get the movements of the squares working - will have to get the keys reconized in 2048.js
+// figure out how making copies of objects works and what not and same thing with arrays
+
 // Board class
 class Board {
   constructor(boardSize) {
@@ -11,6 +17,7 @@ class Board {
 
     for (var y = 0; y < boardSize; y++){
       for (var x = 0; x < boardSize; x++) {
+        console.log("here");
         this.board[y][x] = new Square(x, y); // add random element to this later and add randomly adding numbers later too
       }
     }
@@ -20,47 +27,56 @@ class Board {
     return this.board;
   }
 
+  checkBoard(newBoard){
+    if (newBoard == this.board){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   move(keyPressed) {
-    if (keyPressed == "up") {
+    if (keyPressed == "w") {
       newBoard = moveUp(); // check this logic is correct here
       this.board = newBoard;
-    } else if (keyPressed == "down"){
+      console.log(newBoard);
+    } else if (keyPressed == "d"){
       moveDown();
-    } else if (keyPressed == "left") {
+    } else if (keyPressed == "a") {
       moveLeft();
-    } else {
+    } else if (keyPressed == "d"){
       moveRight();
     }
 
   }
 
-    moveUp() {
-  		newBoard = board; // how make a copy of an array in javascript as I can in java??????????????????
-  		for (var x = 0; x < (newBoard.length); x++) {
-  			for (var y = newBoard.length - 1; y > 0; y--) {
-  				if (newBoard[y][x].getValue() == newBoard[y-1][x].getValue()) {
-  					newBoard[y-1][x].combineSquare();
-  					newBoard[y][x].clearSquare();
-  				} else if (newBoard[y-1][x].getValue() == 0) {
-  					newBoard[y-1][x].setValue(newBoard[y][x].getValue());
-  					newBoard[y][x].clearSquare();
-  				}
-  			}
-  		}
-    		return newBoard;
-    	}
+  moveUp() {
+		newBoard = board; // how make a copy of an array in javascript as I can in java??????????????????
+		for (var x = 0; x < (newBoard.length); x++) {
+			for (var y = newBoard.length - 1; y > 0; y--) {
+				if (newBoard[y][x].getValue() == newBoard[y-1][x].getValue()) {
+					newBoard[y-1][x].combineSquare();
+					newBoard[y][x].clearSquare();
+				} else if (newBoard[y-1][x].getValue() == 0) {
+					newBoard[y-1][x].setValue(newBoard[y][x].getValue());
+					newBoard[y][x].clearSquare();
+				}
+			}
+		}
+  		return newBoard;
+  	}
 
-    moveDown() {
+  moveDown() {
 
-    }
+  }
 
-    moveLeft() {
+  moveLeft() {
 
-    }
+  }
 
-    moveRight() {
+  moveRight() {
 
-    }
+  }
 
 }
 
@@ -71,11 +87,12 @@ class Square {
   constructor (yPos, xPos) {
     this.x_ = xPos;
     this.y_ = yPos;
-    this.value = getRandVal();
+    this.value = 2; //getRandVal(); fix this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
 
   getRandVal(){
-    // use random function here to make the random new squares you need
+    var val = 2;
+    return val;// use random function here to make the random new squares you need
   }
 
   getValue() {
