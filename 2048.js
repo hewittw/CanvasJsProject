@@ -12,8 +12,12 @@ cell_0_0 = document.getElementById(“cell_0_0”); 
 */
 
 // Global Variables
-
-
+var board1 = new Board(4);
+console.log(board1.getBoard());
+board1.intializeBoard();
+console.log(board1);
+board1.moveDown();
+console.log(board1);
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
@@ -28,16 +32,15 @@ function drawAll()
 */
 {
 
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  for (tile of tileList) {
-    tile.move();
-    tile.draw();
-  }
+//  context.clearRect(0, 0, canvas.width, canvas.height);
+  //for (tile of tileList) {
+//    tile.move();
+    //tile.draw();
+//  }
 
   // Loop the animation to the next frame.
   window.requestAnimationFrame(drawAll);
 }
-
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
@@ -55,8 +58,10 @@ context = canvas.getContext("2d");
 
 // Actual Code with classes / real main starts here
 // Create instance of Tile object
-tile1 = new Tile(0, 0);
-tileList = [tile1];
+//tile1 = new Tile(0, 0);
+//tileList = [tile1];
+
+
 
 // Fire up the animation engine
 window.requestAnimationFrame(drawAll);
