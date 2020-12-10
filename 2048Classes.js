@@ -36,43 +36,69 @@ class Board {
   }
 
 
-  // moveUp() {
-	// 	newBoard = board; // how make a copy of an array in javascript as I can in java??????????????????
-	// 	for (var x = 0; x < (newBoard.length); x++) {
-	// 		for (var y = newBoard.length - 1; y > 0; y--) {
-	// 			if (newBoard[y][x].getValue() == newBoard[y-1][x].getValue()) {
-	// 				newBoard[y-1][x].combineSquare();
-	// 				newBoard[y][x].clearSquare();
-	// 			} else if (newBoard[y-1][x].getValue() == 0) {
-	// 				newBoard[y-1][x].setValue(newBoard[y][x].getValue());
-	// 				newBoard[y][x].clearSquare();
-	// 			}
-	// 		}
-	// 	}
-  // 	return newBoard;
-  // }
+  moveUp() {
+		for (var x = 0; x < (this.board.length); x++) {
+			for (var y = this.board.length - 1; y > 0; y--) {
+        if (this.board[y-1][x].getValue() == 0) {
+          console.log("move up");
+					this.board[y-1][x].setValue(this.board[y][x].getValue());
+					this.board[y][x].clearSquare();
+				} else if (this.board[y][x].getValue() == this.board[y-1][x].getValue()) {
+          console.log("combine");
+					this.board[y-1][x].combineSquare();
+					this.board[y][x].clearSquare();
+				}
+			}
+		}
+  }
 
   moveDown() {
 		for (var x = 0; x < (this.board.length); x++) {
 			for (var y = 0; y < (this.board.length - 1); y++) {
-				if (this.board[y][x].getValue() == this.board[y+1][x].getValue()) {
-					console.log("combine");//board[y+1][x].combineSquare();
-					//board[y][x].clearSquare();
-				} else if (this.board[y+1][x].getValue() == 0) {
-					console.log("move down");//this.board[y+1][x].setValue(this.board[y][x].getValue());
-					//board[y][x].clearSquare();
+        if (this.board[y+1][x].getValue() == 0) {
+					console.log("combine");
+          this.board[y+1][x].setValue(this.board[y][x].getValue());
+					this.board[y][x].clearSquare();
+        } else if (this.board[y][x].getValue() == this.board[y+1][x].getValue()) {
+					console.log("move down");
+          this.board[y+1][x].combineSquare();
+					this.board[y][x].clearSquare();
 				}
 			}
 		}
 	}
 
   moveLeft() {
-
-  }
+		for (var y = 0; y < (this.board.length); y++) {
+			for (var x = this.board.length -1; x > 0; x--) {
+			  if (this.board[y][x-1].getValue() == 0) {
+          console.log("move left");
+					this.board[y][x-1].setValue(this.board[y][x].getValue());
+					this.board[y][x].clearSquare();
+				} else if (this.board[y][x].getValue() == this.board[y][x-1].getValue()) {
+          console.log("combine");
+					this.board[y][x-1].combineSquare();
+					this.board[y][x].clearSquare();
+        }
+			}
+		}
+	}
 
   moveRight() {
-
-  }
+		for (var y = 0; y < (this.board.length); y++) {
+			for (var x = 0; x < (this.board.length - 1); x++) {
+			  if (this.board[y][x+1].getValue() == 0) {
+          console.log("move right");
+					this.board[y][x+1].setValue(this.board[y][x].getValue());
+					this.board[y][x].clearSquare();
+				} else if (this.board[y][x].getValue() == this.board[y][x+1].getValue()) {
+          console.log("combine");
+          this.board[y][x+1].combineSquare();
+					this.board[y][x].clearSquare();
+				}
+			}
+		}
+	}
 
 }
 
@@ -87,12 +113,24 @@ class Square {
   }
 
   getRandVal(){
-    var val = 2;
+    var val = 0;
     return val;// use random function here to make the random new squares you need
   }
 
   getValue() {
     return this.value;
+  }
+
+  combineSquare(){
+    this.value = this.value * 2;
+  }
+
+  clearSquare (){
+    this.value = 0;
+  }
+
+  setValue(value2){
+    this.value = value2;
   }
 
 }

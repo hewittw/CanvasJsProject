@@ -43,15 +43,15 @@ function myKeyDown (event) {
 
 function move(keyPressed) {
   if (keyPressed == "w") {
-    newBoard = moveUp(); // check this logic is correct here
+    newBoard = board1.moveUp(); // check this logic is correct here
     this.board = newBoard;
     console.log(newBoard);
   } else if (keyPressed == "d"){
     board1.moveDown();
   } else if (keyPressed == "a") {
-    moveLeft();
+    newBoard = board1.moveLeft();
   } else if (keyPressed == "d"){
-    moveRight();
+    newBoard = board1.moveRight();
   }
 
 }
