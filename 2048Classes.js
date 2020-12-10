@@ -4,6 +4,13 @@
 // get the movements of the squares working - will have to get the keys reconized in 2048.js
 // figure out how making copies of objects works and what not and same thing with arrays
 
+//Functions
+function getRandomInt(max) {
+  //console.log("random num");
+  //console.log(Math.floor(Math.random() * Math.floor(max)))
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 // Board class
 class Board {
   constructor(boardSize) {
@@ -100,6 +107,24 @@ class Board {
 		}
 	}
 
+  addNewSquare(){
+    var boardFull = true;
+    var emptySquares = new Array();
+    for (var y = 0; y < this.board.length; y++){
+      for (var x = 0; x < this.board.length; x++){
+        if (this.board[y][x].getValue() == 0){
+          emptySquares.push(this.board[y][x]);
+          boardFull = false;
+          console.log("addNewSquare");
+          console.log(this.board[y][x]);
+        }
+      }
+    }
+    console.log(emptySquares[getRandomInt(emptySquares.length)]);
+    emptySquares[getRandomInt(emptySquares.length)].setRandVal();
+    return boardFull;
+  }
+
 }
 
 // Square class
@@ -109,12 +134,14 @@ class Square {
   constructor (yPos, xPos) {
     this.x_ = xPos;
     this.y_ = yPos;
-    this.value = 2; //getRandVal(); fix this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    this.values = [0,2,4]; ///// fix this - FIND OUT HOW TO CALL ONE METHOD INSIDE ANOTHER
+    this.value = this.values[getRandomInt(3)]; //getRandVal(); fix this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    console.log(this.value);
   }
 
-  getRandVal(){
-    var val = 0;
-    return val;// use random function here to make the random new squares you need
+  setRandVal(){
+    this.values = [0,2,4]; ///// fix this - FIND OUT HOW TO CALL ONE METHOD INSIDE ANOTHER
+    this.value = this.values[getRandomInt(3)];  /// FIND OUT HOW TO USE THIS CODE ABOVE!!!!!!!!!!!!!
   }
 
   getValue() {

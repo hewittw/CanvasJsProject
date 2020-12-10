@@ -43,9 +43,7 @@ function myKeyDown (event) {
 
 function move(keyPressed) {
   if (keyPressed == "w") {
-    newBoard = board1.moveUp(); // check this logic is correct here
-    this.board = newBoard;
-    console.log(newBoard);
+    board1.moveUp(); // check this logic is correct here
   } else if (keyPressed == "d"){
     board1.moveDown();
   } else if (keyPressed == "a") {
@@ -54,6 +52,7 @@ function move(keyPressed) {
     newBoard = board1.moveRight();
   }
 
+  boardFull = board1.addNewSquare();
 }
 
 function drawAll()
