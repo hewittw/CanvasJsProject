@@ -12,6 +12,8 @@ cell_0_0 = document.getElementById(“cell_0_0”); 
 */
 
 // Global Variables
+var boardSize = 4;
+
 var board1 = new Board(4);
 console.log(board1.getBoard());
 board1.intializeBoard(4);
@@ -23,15 +25,8 @@ console.log(board1);
 /******************************************************************************/
 
 // Functions
+
 function myKeyDown (event) {
-  /*
-    Parameters: event object, which contains information about the event
-      that triggered the event listener.
-    Returns: None, but modifies global variables which track response to event.
-    Purpose: Make the animation respond to keys being pressed.
-  */
-  // One of the attributes of the event object is 'which,' contains the key
-  //   that was pressed to trigger the event listener.
   keyCode = event.which;
   keyStr = event.key;
   console.log(event);
@@ -47,27 +42,15 @@ function move(keyPressed) {
   } else if (keyPressed == "d"){
     board1.moveDown();
   } else if (keyPressed == "a") {
-    newBoard = board1.moveLeft();
+    board1.moveLeft();
   } else if (keyPressed == "d"){
-    newBoard = board1.moveRight();
+    board1.moveRight();
   }
-
-  boardFull = board1.addNewSquare();
+  board1.checkBoard(keyPressed); // could be error
+  boardFull = board1.addNewSquare(); // have a separate draw method for this and do after drawing movements
 }
 
-function drawAll()
-/*
-  Purpose: This is the main drawing loop.
-  Inputs: None, but it is affected by what the other functions are doing
-  Returns: None, but it calls itself to cycle to the next frame
-*/
-{
-
-//  context.clearRect(0, 0, canvas.width, canvas.height);
-  //for (tile of tileList) {
-//    tile.move();
-    //tile.draw();
-//  }
+function drawAll() {
 
   // Loop the animation to the next frame.
   window.requestAnimationFrame(drawAll);
@@ -78,19 +61,13 @@ function drawAll()
 
 // Main
 
-// Setting up Canvas and what not
-canvas = document.getElementById("mainCanvas");
-// Set up the canvas and context objects
-context = canvas.getContext("2d");
-
-//document.addEventListener("keydown", myKeyDown); // FIX THIS LATER
+var canvas = document.getElementById("mainCanvas");
+var ctx = canvas.getContext("2d");
+ctx.fillStyle = "#FF0000";
+ctx.fillRect(0, 0, 150, 75);
 
 /******************************************************************************/
 
-// Actual Code with classes / real main starts here
-// Create instance of Tile object
-//tile1 = new Tile(0, 0);
-//tileList = [tile1];
 
 document.addEventListener("keydown", myKeyDown);
 

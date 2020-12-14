@@ -3,6 +3,7 @@
 // get the random function in square working
 // get the movements of the squares working - will have to get the keys reconized in 2048.js
 // figure out how making copies of objects works and what not and same thing with arrays
+// check that you are not in two states at once
 
 //Functions
 function getRandomInt(max) {
@@ -15,17 +16,20 @@ function getRandomInt(max) {
 class Board {
   constructor(boardSize) {
     this.board = new Array(boardSize);
+    this.tiles = new Array(boardSize);
   }
 
   intializeBoard(boardSize) {
     for (var i = 0; i < boardSize; i++) {
       this.board[i] = new Array(boardSize);
+      this.tiles[i] = new Array(boardSize);
     }
 
     for (var y = 0; y < boardSize; y++){
       for (var x = 0; x < boardSize; x++) {
         console.log("here");
         this.board[y][x] = new Square(x, y); // add random element to this later and add randomly adding numbers later too
+        this.tiles[y][x] = new Tile(x, y); // 3rd parameter is Square object
       }
     }
   }
@@ -120,9 +124,17 @@ class Board {
         }
       }
     }
-    console.log(emptySquares[getRandomInt(emptySquares.length)]);
-    emptySquares[getRandomInt(emptySquares.length)].setRandVal();
+    if (emptySquares.length != 0){
+      console.log(emptySquares[getRandomInt(emptySquares.length)]);
+      emptySquares[getRandomInt(emptySquares.length)].setRandVal();
+    }
     return boardFull;
+  }
+
+  checkBoard(moveType){
+    if (moveType == "w"){
+      
+    }
   }
 
 }
@@ -164,8 +176,29 @@ class Square {
 
 // Tile Class
 class Tile {
+  // get Dr. J to help you make sure everything is depedent on the screen size
+  constructor(x, y) { // do I have to pass the board
+    //windowWidth = window.innerWidth;
+    //windowHeight = window.innerHeight; // ask dr. j why this isn't working ??????
+    //value = Square1.getValue();
+    this.xPos = x;
+    this.yPos = y;
 
-  constructor() {
+  }
+
+  drawTile(x, y){
+
+  }
+
+  moveTile(oldX, oldY, newX, newY){
+
+  }
+
+  drawValue(value){
+
+  }
+
+  endGame(GAME_OVER){
 
   }
 
