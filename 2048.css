@@ -1,0 +1,26 @@
+
+h1 {
+  text-align: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 5px;
+  text-shadow: 7px 7px 5px rgb(155,155,155);
+  color: white;
+  font-size: 60px;
+  margin-bottom: 0px;
+}
+
+h2 {
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+}
+
+canvas {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}

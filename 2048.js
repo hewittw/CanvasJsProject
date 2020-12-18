@@ -2,22 +2,71 @@
 
 // ask dr. j about end of game and then also graphics colors
 // also ask him if how I re draw the board is ok??????
+// ask if my code is efficient / not to repetitive ????
+// ask if I should make a loop????
+// can you see all my work on git hub ???
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
 
 // Functions
 
-function gameOver(){
+function colorChoser(value){
+  if (value == 2){
+    var color = "#00FFFF";
+  } else if (value == 4){
+    var color = "#7FFFD4";
+  } else if (value == 8){
+    var color = "#0000FF";
+  } else if (value == 16){
+    var color = "#8A2BE2";
+  } else if (value == 32){
+    var color = "#5F9EA0";
+  } else if (value == 64){
+    var color = "#008B8B";
+  } else if (value >= 128){
+    var color = "#00008B";
+  }
 
+  return color;
+}
+
+function gameOver(){
+  var canvas = document.getElementById("mainCanvas");
+  var ctx = canvas.getContext("2d");
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "white";
+  message = "GAME OVER";
+  message2 = "Press Enter to Play Again";
+  var mText = ctx.measureText(message); //
+  ctx.textBaseline = "middle";
+
+  var textX = 0 + (canvas.width / 2) - mText.width / 2;
+  var textY = 0 + (canvas.height / 2);
+  ctx.fillText(String(message), textX, textY);
+  ctx.strokeText(String(message), textX, textY);
+
+  ctx.font = "50px Arial";
+  var mText2 = ctx.measureText(message2);
+  var textX2 = 0 + (canvas.width / 2) - mText2.width / 2;  // get this to align
+  var textY2 = textY + 100;
+  var mText2 = ctx.measureText(message2);
+  ctx.fillText(String(message2), textX2, textY2);
+  ctx.strokeText(String(message2), textX2, textY2);
 }
 
 function myKeyDown (event) {
   keyCode = event.which;
   keyStr = event.key;
-  console.log(event);
-  console.log(keyCode);
+  //console.log(event);
+  //console.log(keyCode);
   console.log(keyStr);
+  if (KEEP_PLAYING == false && keyStr == "Enter"){
+    board1.intializeBoard(4);
+    KEEP_PLAYING = true;
+  }
   if (KEEP_PLAYING == true){
     move(keyStr);
   }
@@ -49,8 +98,6 @@ function drawAll() {
   var ctx = canvas.getContext("2d");
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = "#FF0000";
   ctx.textBaseline = "middle";
   ctx.font = "100px Arial";
   var gap = 10;
@@ -58,9 +105,10 @@ function drawAll() {
   var numCells = board1.getBoard().length
   for (var y = 0; y < numCells; y++){
     for (var x = 0; x < numCells; x++){
-      var cellValue = board[y][x].getValue()
+      var cellValue = board[y][x].getValue();
+      color = colorChoser(cellValue);
+      ctx.fillStyle = color;
       if (cellValue != 0){
-        ctx.fillStyle = "#FF0000";
         var cellSize = (canvas.width - (numCells - 1) * gap) / numCells;
 
         var cellLeftEdge = x * (cellSize + gap);
@@ -87,9 +135,8 @@ function drawAll() {
 /******************************************************************************/
 
 // Main
-windowWidth = window.innerWidth;
-windowHeight = window.innerHeight;
 var canvas = document.getElementById("mainCanvas");
+canvas.style.border = "5px solid #483D8B";
 var ctx = canvas.getContext("2d");
 //ctx.fillStyle = "#FF0000";
 //ctx.fillRect(0, 0, 150, 75);
@@ -105,4 +152,4 @@ KEEP_PLAYING = true;
 document.addEventListener("keydown", myKeyDown);
 
 // Fire up the animation engine
-window.requestAnimationFrame(() => drawAll(window.innerWidth, window.innerHeight));
+window.requestAnimationFrame(() => drawAll());
