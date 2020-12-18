@@ -5,6 +5,9 @@
 // figure out how making copies of objects works and what not and same thing with arrays
 // check that you are not in two states at once
 
+// recent to do's
+// 1) fill in functions outlined to draw board and check board 2) add function comments
+
 //Functions
 function getRandomInt(max) {
   //console.log("random num");
@@ -131,9 +134,22 @@ class Board {
     return boardFull;
   }
 
+  // drawBoard(){
+  //   squareWidth = window.widthInner / 10;
+  //   squareHeight = windowHeight / 10;
+  //   ctx.fillStyle = "#FF0000";
+  //   // ctx.fillRect(0, 0, 150, 75);
+  //   for (var y = 0; y < this.board.length; y++){
+  //     for (var x = 0; x < this.board.length; x++){
+  //       ctx.fillRect(0.5*windowWidth, 0, 150, 75);
+  //     }
+  //   }
+  // }
+
+  // do later
   checkBoard(moveType){
     if (moveType == "w"){
-      
+
     }
   }
 
@@ -174,7 +190,7 @@ class Square {
 
 }
 
-// Tile Class
+// Tile Class - would use if I was doing the animation
 class Tile {
   // get Dr. J to help you make sure everything is depedent on the screen size
   constructor(x, y) { // do I have to pass the board
@@ -183,14 +199,19 @@ class Tile {
     //value = Square1.getValue();
     this.xPos = x;
     this.yPos = y;
-
+    // use list and indexing list to store information to draw the tiles
+    // will have to do an orginal draw board method - don't draw unitl all values are known as not drawing non zero squares
   }
-
+  // at any given time, you will only be drawing, moving, or deleting
   drawTile(x, y){
 
   }
 
   moveTile(oldX, oldY, newX, newY){
+
+  }
+
+  deleteTile(){
 
   }
 

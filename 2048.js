@@ -12,14 +12,14 @@ cell_0_0 = document.getElementById(“cell_0_0”); 
 */
 
 // Global Variables
-var boardSize = 4;
-
-var board1 = new Board(4);
-console.log(board1.getBoard());
-board1.intializeBoard(4);
-console.log(board1);
-board1.moveDown();
-console.log(board1);
+// var boardSize = 4;
+//
+// var board1 = new Board(4);
+// console.log(board1.getBoard());
+// board1.intializeBoard(4);
+// console.log(board1);
+// board1.moveDown();
+// console.log(board1);
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
@@ -51,25 +51,56 @@ function move(keyPressed) {
 }
 
 function drawAll() {
+  //window.requestAnimationFrame(drawAll);
 
+  var canvas = document.getElementById("mainCanvas");
+  var ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = "#FF0000";
+  // ctx.fillRect(0, 0, 150, 75);
+  var gap = 10;
+  var numCells = board1.getBoard().length
+  for (var y = 0; y < numCells; y++){
+    for (var x = 0; x < numCells; x++){
+      var cellSize = (canvas.width - (numCells - 1) * gap) / numCells;
+      console.log(cellSize);
+
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(x * (cellSize + gap), y * (cellSize + gap), cellSize, cellSize);
+      ctx.stroke();
+
+      ctx.font = "30px Arial";
+      var mText = ct.measureText('4'); //
+      ctx.strokeText("4", x * (cellSize + gap), y * (cellSize + gap));
+
+    }
+  }
   // Loop the animation to the next frame.
-  window.requestAnimationFrame(drawAll);
+  //window.requestAnimationFrame(drawAll);
 }
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
 
 // Main
-
+windowWidth = window.innerWidth;
+windowHeight = window.innerHeight;
 var canvas = document.getElementById("mainCanvas");
 var ctx = canvas.getContext("2d");
-ctx.fillStyle = "#FF0000";
-ctx.fillRect(0, 0, 150, 75);
+//ctx.fillStyle = "#FF0000";
+//ctx.fillRect(0, 0, 150, 75);
 
 /******************************************************************************/
-
+// Creating Board
+var boardSize = 4;
+var board1 = new Board(4);
+console.log(board1.getBoard());
+board1.intializeBoard(4);
+console.log(board1);
+board1.moveDown();
+console.log(board1);
 
 document.addEventListener("keydown", myKeyDown);
 
 // Fire up the animation engine
-window.requestAnimationFrame(drawAll);
+window.requestAnimationFrame(() => drawAll(window.innerWidth, window.innerHeight));
