@@ -49,7 +49,7 @@ class Board {
     }
   }
 
-
+  // working here
   moveUp() {
 		for (var x = 0; x < (this.board.length); x++) {
 			for (var y = this.board.length - 1; y > 0; y--) {
@@ -64,6 +64,17 @@ class Board {
 				}
 			}
 		}
+    for (var i = 0; i < 2; i++){
+      for (var x = 0; x < (this.board.length); x++) {
+  			for (var y = this.board.length - 1; y > 0; y--) {
+          if (this.board[y-1][x].getValue() == 0) {
+            console.log("move up");
+  					this.board[y-1][x].setValue(this.board[y][x].getValue());
+  					this.board[y][x].clearSquare();
+  				}
+  			}
+  		}
+    }
   }
 
   moveDown() {
@@ -80,6 +91,17 @@ class Board {
 				}
 			}
 		}
+    for (var i = 0; i < 2; i++){
+      for (var x = 0; x < (this.board.length); x++) {
+        for (var y = 0; y < (this.board.length - 1); y++) {
+          if (this.board[y+1][x].getValue() == 0) {
+            console.log("combine");
+            this.board[y+1][x].setValue(this.board[y][x].getValue());
+            this.board[y][x].clearSquare();
+          }
+        }
+      }
+    }
 	}
 
   moveLeft() {
@@ -96,6 +118,17 @@ class Board {
         }
 			}
 		}
+    for (var i = 0; i < 2; i++){
+      for (var y = 0; y < (this.board.length); y++) {
+        for (var x = this.board.length -1; x > 0; x--) {
+          if (this.board[y][x-1].getValue() == 0) {
+            console.log("move left");
+            this.board[y][x-1].setValue(this.board[y][x].getValue());
+            this.board[y][x].clearSquare();
+          }
+        }
+      }
+    }
 	}
 
   moveRight() {
@@ -112,6 +145,17 @@ class Board {
 				}
 			}
 		}
+    for (var i = 0; i < 2; i++){
+      for (var y = 0; y < (this.board.length); y++) {
+  			for (var x = 0; x < (this.board.length - 1); x++) {
+  			  if (this.board[y][x+1].getValue() == 0) {
+            console.log("move right");
+  					this.board[y][x+1].setValue(this.board[y][x].getValue());
+  					this.board[y][x].clearSquare();
+  				}
+  			}
+  		}
+    }
 	}
 
   addNewSquare(){
