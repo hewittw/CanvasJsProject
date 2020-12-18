@@ -58,6 +58,8 @@ function drawAll() {
 
   ctx.fillStyle = "#FF0000";
   // ctx.fillRect(0, 0, 150, 75);
+  ctx.textBaseline = "middle";
+  ctx.font = "100px Arial";
   var gap = 10;
   var numCells = board1.getBoard().length
   for (var y = 0; y < numCells; y++){
@@ -65,13 +67,20 @@ function drawAll() {
       var cellSize = (canvas.width - (numCells - 1) * gap) / numCells;
       console.log(cellSize);
 
-      ctx.fillStyle = "#FF0000";
-      ctx.fillRect(x * (cellSize + gap), y * (cellSize + gap), cellSize, cellSize);
+      var cellLeftEdge = x * (cellSize + gap);
+      var cellTopEdge = y * (cellSize + gap);
+      ctx.fillRect(cellLeftEdge, cellTopEdge, cellSize, cellSize);
       ctx.stroke();
 
-      ctx.font = "30px Arial";
-      var mText = ct.measureText('4'); //
-      ctx.strokeText("4", x * (cellSize + gap), y * (cellSize + gap));
+
+      var mText = ctx.measureText('4'); //
+      ctx.textBaseline = "middle";
+
+      var textX = cellLeftEdge + (cellSize / 2) - mText.width / 2;
+      var textY = cellTopEdge  + (cellSize / 2);
+      console.log(textX);
+      console.log(textY);
+      ctx.strokeText("4", textX, textY);
 
     }
   }
