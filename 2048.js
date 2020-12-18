@@ -1,13 +1,3 @@
-// Graphics are done - just add color change if you want // TODO:
-
-// ask dr. j about end of game and then also graphics colors
-// also ask him if how I re draw the board is ok??????
-// ask if my code is efficient / not to repetitive ????
-// ask if I should make a loop????
-// can you see all my work on git hub ???
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
 
 // Functions
 
@@ -62,11 +52,11 @@ function myKeyDown (event) {
   keyStr = event.key;
   //console.log(event);
   //console.log(keyCode);
-  console.log(keyStr);
+  //console.log(keyStr);
   if (KEEP_PLAYING == false && keyStr == "Enter"){
     board1.intializeBoard(4);
     KEEP_PLAYING = true;
-  }
+  }                             // FIX REPTITIVE LOGIC HERE!!!!!!!!!!!!!!
   if (KEEP_PLAYING == true){
     move(keyStr);
   }
@@ -84,11 +74,15 @@ function move(keyPressed) {
     KEEP_PLAYING = board1.moveRight();
   }
 
-  BOARD_FULL = board1.addNewSquare();
-  if (KEEP_PLAYING == true || BOARD_FULL == false){
+  BOARD_FULL = board1.addNewSquare();   // I think error is in addNewSquare and then calling game over
+  if (BOARD_FULL == false || KEEP_PLAYING == true){    // last game error lies here fix
+    KEEP_PLAYING = true;
+    console.log("got here"); // checked fixed error here.
+    console.log(KEEP_PLAYING);
+    console.log(BOARD_FULL);
     window.requestAnimationFrame(drawAll);
   } else {
-    gameOver(); // work on this line of code stopping the loop here!!!!
+    gameOver();
   }
 
 }
@@ -128,8 +122,6 @@ function drawAll() {
       }
     }
   }
-  // Loop the animation to the next frame.
-  //window.requestAnimationFrame(drawAll);
 }
 /******************************************************************************/
 /******************************************************************************/
@@ -139,8 +131,7 @@ function drawAll() {
 var canvas = document.getElementById("mainCanvas");
 canvas.style.border = "5px solid #483D8B";
 var ctx = canvas.getContext("2d");
-//ctx.fillStyle = "#FF0000";
-//ctx.fillRect(0, 0, 150, 75);
+
 
 /******************************************************************************/
 // Creating Board

@@ -1,12 +1,4 @@
-// To do's
-// fix the intializeBoard function
-// get the random function in square working
-// get the movements of the squares working - will have to get the keys reconized in 2048.js
-// figure out how making copies of objects works and what not and same thing with arrays
-// check that you are not in two states at once
 
-// recent to do's
-// 1) fill in functions outlined to draw board and check board 2) add function comments
 
 //Functions
 function getRandomInt(max) {
@@ -35,16 +27,9 @@ class Board {
     return this.board;
   }
 
-  checkBoard(newBoard){
-    if (newBoard == this.board){
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   // working here
   moveUp() {
+    console.log("here");
     var BOARD_CHANGED = false;
 		for (var x = 0; x < (this.board.length); x++) {
 			for (var y = this.board.length - 1; y > 0; y--) {
@@ -70,6 +55,7 @@ class Board {
   			}
   		}
     }
+    console.log(BOARD_CHANGED);
     return BOARD_CHANGED;
   }
 
@@ -99,6 +85,7 @@ class Board {
         }
       }
     }
+    console.log(BOARD_CHANGED);
     return BOARD_CHANGED;
 	}
 
@@ -128,6 +115,7 @@ class Board {
         }
       }
     }
+    console.log(BOARD_CHANGED);
     return BOARD_CHANGED;
 	}
 
@@ -157,6 +145,7 @@ class Board {
   			}
   		}
     }
+    console.log(BOARD_CHANGED);
     return BOARD_CHANGED;
 	}
 
@@ -174,6 +163,7 @@ class Board {
     if (emptySquares.length != 0){
       emptySquares[getRandomInt(emptySquares.length)].setRandVal();
     }
+    console.log(BOARD_FULL);
     return BOARD_FULL;
   }
 }
