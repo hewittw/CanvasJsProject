@@ -83,8 +83,9 @@ function move(keyPressed) {
   } else if (keyPressed == "d"){
     KEEP_PLAYING = board1.moveRight();
   }
-  if (KEEP_PLAYING == true){
-    board1.addNewSquare();
+
+  BOARD_FULL = board1.addNewSquare();
+  if (KEEP_PLAYING == true || BOARD_FULL == false){
     window.requestAnimationFrame(drawAll);
   } else {
     gameOver(); // work on this line of code stopping the loop here!!!!

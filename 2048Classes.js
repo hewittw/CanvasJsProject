@@ -161,20 +161,20 @@ class Board {
 	}
 
   addNewSquare(){
-    var boardFull = true;
+    var BOARD_FULL = true;
     var emptySquares = new Array();
     for (var y = 0; y < this.board.length; y++){
       for (var x = 0; x < this.board.length; x++){
         if (this.board[y][x].getValue() == 0){
           emptySquares.push(this.board[y][x]);
-          boardFull = false;
+          BOARD_FULL = false;
         }
       }
     }
     if (emptySquares.length != 0){
       emptySquares[getRandomInt(emptySquares.length)].setRandVal();
     }
-    return boardFull;
+    return BOARD_FULL;
   }
 }
 
