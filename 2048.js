@@ -1,11 +1,16 @@
 // Graphics are done - just add color change if you want // TODO:
 
-
+// ask dr. j about end of game and then also graphics colors
+// also ask him if how I re draw the board is ok??????
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
 
 // Functions
+
+function gameOver(){
+
+}
 
 function myKeyDown (event) {
   keyCode = event.which;
@@ -13,23 +18,29 @@ function myKeyDown (event) {
   console.log(event);
   console.log(keyCode);
   console.log(keyStr);
-  move(keyStr);
+  if (KEEP_PLAYING == true){
+    move(keyStr);
+  }
 
 }
 
 function move(keyPressed) {
   if (keyPressed == "w") {
-    board1.moveUp(); // check this logic is correct here
+    KEEP_PLAYING = board1.moveUp(); // check this logic is correct here
   } else if (keyPressed == "s"){
-    board1.moveDown();
+    KEEP_PLAYING = board1.moveDown();
   } else if (keyPressed == "a") {
-    board1.moveLeft();
+    KEEP_PLAYING = board1.moveLeft();
   } else if (keyPressed == "d"){
-    board1.moveRight();
+    KEEP_PLAYING = board1.moveRight();
+  }
+  if (KEEP_PLAYING == true){
+    board1.addNewSquare();
+    window.requestAnimationFrame(drawAll);
+  } else {
+    gameOver(); // work on this line of code stopping the loop here!!!!
   }
 
-  board1.addNewSquare();  
-  window.requestAnimationFrame(drawAll);
 }
 
 function drawAll() {
@@ -40,7 +51,6 @@ function drawAll() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = "#FF0000";
-  // ctx.fillRect(0, 0, 150, 75);
   ctx.textBaseline = "middle";
   ctx.font = "100px Arial";
   var gap = 10;
@@ -90,6 +100,7 @@ var boardSize = 4;
 var board1 = new Board(4);
 board1.intializeBoard(4);
 board1.moveDown();
+KEEP_PLAYING = true;
 
 document.addEventListener("keydown", myKeyDown);
 
