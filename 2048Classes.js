@@ -1,16 +1,28 @@
-
-
 //Functions
+
 function getRandomInt(max) {
+  /*
+  Purpose: To return a random number
+  Parameters:
+  Returns:
+  */
   return Math.floor(Math.random() * Math.floor(max));
 }
 
 // Board class
+/*
+This class serves as the 2048 board. It contains a 2D array of Square objects
+that represents squares on the board. It contains class methods to update the
+board as moves are performed, to add new squares to be added to the board, etc.
+*/
 class Board {
+
+  // Constructor - instantiate board array
   constructor(boardSize) {
     this.board = new Array(boardSize);
   }
 
+  // Create the 2D board array and assign all Square objects there beginning values
   intializeBoard(boardSize) {
     for (var i = 0; i < boardSize; i++) {
       this.board[i] = new Array(boardSize);
@@ -18,7 +30,7 @@ class Board {
 
     for (var y = 0; y < boardSize; y++){
       for (var x = 0; x < boardSize; x++) {
-        this.board[y][x] = new Square(x, y); // add random element to this later and add randomly adding numbers later too
+        this.board[y][x] = new Square();
       }
     }
   }
@@ -27,8 +39,14 @@ class Board {
     return this.board;
   }
 
-  // working here
   moveUp() {
+    /*
+    Purpose: Shift and combine all parts of the board up. Also, check to see if
+             the board changes and report if it does / doesn't. This plays a part
+             in determing if the game will continue.
+    Parameters: None
+    Returns: A boolean value representing whether or not the board changed.
+    */
     console.log("here");
     var BOARD_CHANGED = false;
 		for (var x = 0; x < (this.board.length); x++) {
@@ -55,11 +73,17 @@ class Board {
   			}
   		}
     }
-    console.log(BOARD_CHANGED);
     return BOARD_CHANGED;
   }
 
   moveDown() {
+    /*
+    Purpose: Shift and combine all parts of the board down. Also, check to see if
+             the board changes and report if it does / doesn't. This plays a part
+             in determing if the game will continue.
+    Parameters: None
+    Returns: A boolean value representing whether or not the board changed.
+    */
     var BOARD_CHANGED = false;
 		for (var x = 0; x < (this.board.length); x++) {
 			for (var y = 0; y < (this.board.length - 1); y++) {
@@ -85,11 +109,17 @@ class Board {
         }
       }
     }
-    console.log(BOARD_CHANGED);
     return BOARD_CHANGED;
 	}
 
   moveLeft() {
+    /*
+    Purpose: Shift and combine all parts of the board left. Also, check to see it
+             the board changes and report if it does / doesn't. This plays a part
+             in determing if the game will continue.
+    Parameters: None
+    Returns: A boolean value representing whether or not the board changed.
+    */
     var BOARD_CHANGED = false;
 		for (var y = 0; y < (this.board.length); y++) {
 			for (var x = this.board.length -1; x > 0; x--) {
@@ -115,11 +145,17 @@ class Board {
         }
       }
     }
-    console.log(BOARD_CHANGED);
     return BOARD_CHANGED;
 	}
 
   moveRight() {
+    /*
+    Purpose: Shift and combine all parts of the board right. Also, check to see it
+             the board changes and report if it does / doesn't. This plays a part
+             in determing if the game will continue.
+    Parameters: None
+    Returns: A boolean value representing whether or not the board changed.
+    */
     var BOARD_CHANGED = false;
 		for (var y = 0; y < (this.board.length); y++) {
 			for (var x = 0; x < (this.board.length - 1); x++) {
@@ -145,11 +181,17 @@ class Board {
   			}
   		}
     }
-    console.log(BOARD_CHANGED);
     return BOARD_CHANGED;
 	}
 
   addNewSquare(){
+    /*
+    Purpose: Add new Square objects with random values to the board if there is
+             any empty spots on the board. Record whether or not the board is full.
+             This plays a part in determing if the game is over or not.
+    Parameters: None
+    Returns: A boolean value representing whether or not the board is full.
+    */
     var BOARD_FULL = true;
     var emptySquares = new Array();
     for (var y = 0; y < this.board.length; y++){
@@ -163,41 +205,50 @@ class Board {
     if (emptySquares.length != 0){
       emptySquares[getRandomInt(emptySquares.length)].setRandVal();
     }
-    console.log(BOARD_FULL);
     return BOARD_FULL;
   }
 }
 
 // Square class
-
 class Square {
+  /*
+  The Square class allows objects to be created that represent Squares on the
+  board. Orginally, the Square class was more useful when I was going to have animations.
+  Nevertheless, the Square class contains lots of class methods that helps the board
+  class update the board etc.
+  */
 
-  constructor (yPos, xPos) {
-    this.x_ = xPos;
-    this.y_ = yPos;
+  constructor () {
     this.values = [0,2,4]; ///// fix this - FIND OUT HOW TO CALL ONE METHOD INSIDE ANOTHER
     this.value = this.values[getRandomInt(3)]; //getRandVal(); fix this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
 
+  // Determine the random value of a Square object when it is created
   setRandVal(){
     this.values = [0,2,4]; ///// fix this - FIND OUT HOW TO CALL ONE METHOD INSIDE ANOTHER
     this.value = this.values[getRandomInt(3)];  /// FIND OUT HOW TO USE THIS CODE ABOVE!!!!!!!!!!!!!
   }
 
+  // Getter
   getValue() {
     return this.value;
   }
 
+  // Setter
+  setValue(value2){
+    this.value = value2;
+  }
+
+  /*
+  These 2 mothods below are all used to change the value of a Square when it
+  is moved on the board
+  */
   combineSquare(){
     this.value = this.value * 2;
   }
 
   clearSquare (){
     this.value = 0;
-  }
-
-  setValue(value2){
-    this.value = value2;
   }
 
 }
