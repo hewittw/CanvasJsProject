@@ -43,8 +43,8 @@ function gameOver(){
   ctx.fillStyle = "white";
   message = "GAME OVER";
   message2 = "Press Enter to Play Again";
-  var mText = ctx.measureText(message); //
-  ctx.textBaseline = "middle";
+  var mText = ctx.measureText(message); //get width dimensions of text
+  ctx.textBaseline = "middle"; //use to help center height of text
 
   var textX = 0 + (canvas.width / 2) - mText.width / 2;
   var textY = 0 + (canvas.height / 2);
@@ -53,7 +53,7 @@ function gameOver(){
 
   ctx.font = "50px Arial";
   var mText2 = ctx.measureText(message2);
-  var textX2 = 0 + (canvas.width / 2) - mText2.width / 2;  // get this to align
+  var textX2 = 0 + (canvas.width / 2) - mText2.width / 2;
   var textY2 = textY + 100;
   var mText2 = ctx.measureText(message2);
   ctx.fillText(String(message2), textX2, textY2);
@@ -73,28 +73,28 @@ function drawAll() {
   ctx.font = "100px Arial";
   var gap = 10;
   var board = board1.getBoard();
-  var numCells = board1.getBoard().length
-  for (var y = 0; y < numCells; y++){
-    for (var x = 0; x < numCells; x++){
-      var cellValue = board[y][x].getValue();
-      color = colorChoser(cellValue);
+  var numSquares = board1.getBoard().length
+  for (var y = 0; y < numSquares; y++){
+    for (var x = 0; x < numSquares; x++){
+      var squareValue = board[y][x].getValue();
+      color = colorChoser(squareValue);
       ctx.fillStyle = color;
-      if (cellValue != 0){
-        var cellSize = (canvas.width - (numCells - 1) * gap) / numCells;
+      if (squareValue != 0){
+        var squareSize = (canvas.width - (numSquares - 1) * gap) / numSquares;
 
-        var cellLeftEdge = x * (cellSize + gap);
-        var cellTopEdge = y * (cellSize + gap);
-        ctx.fillRect(cellLeftEdge, cellTopEdge, cellSize, cellSize);
+        var squareLeftEdge = x * (squareSize + gap);
+        var squareTopEdge = y * (squareSize + gap);
+        ctx.fillRect(squareLeftEdge, squareTopEdge, squareSize, squareSize);
         ctx.stroke();
 
         ctx.fillStyle = "black";
-        var mText = ctx.measureText(String(cellValue)); //
+        var mText = ctx.measureText(String(squareValue)); //get width dimensions of text
         ctx.textBaseline = "middle";
 
-        var textX = cellLeftEdge + (cellSize / 2) - mText.width / 2;
-        var textY = cellTopEdge  + (cellSize / 2);
-        ctx.fillText(String(cellValue), textX, textY);
-        ctx.strokeText(String(cellValue), textX, textY);
+        var textX = squareLeftEdge + (squareSize / 2) - mText.width / 2;
+        var textY = squareTopEdge  + (squareSize / 2);
+        ctx.fillText(String(squareValue), textX, textY);
+        ctx.strokeText(String(squareValue), textX, textY);
       }
     }
   }
@@ -120,7 +120,7 @@ function move(keyPressed) {
   }
 
   /*
-    The statements below determine the future state of the game. If the board is
+    The statements below determine the next state of the game. If the board is
     not full, the game will continue regardless of the value of KEEP_PLAYING. That
     is why KEEP_PLAYING is set equal to true after the if statement. If either
     KEEP_PLAYING is true or BOARD_FULL is false, the game can continue. Otherwise,
@@ -150,11 +150,10 @@ function myKeyDown (event) {
   if (KEEP_PLAYING == false && keyStr == "Enter"){
     board1.intializeBoard(boardSize);
     KEEP_PLAYING = true;
-  }                             // FIX REPTITIVE LOGIC HERE!!!!!!!!!!!!!!
+  }
   if (KEEP_PLAYING == true){
     move(keyStr);
   }
-
 }
 
 /******************************************************************************/

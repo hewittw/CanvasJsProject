@@ -2,20 +2,22 @@
 
 function getRandomInt(max) {
   /*
-  Purpose: To return a random number
-  Parameters:
-  Returns:
+  Purpose: To return a random number between zero and the number given (non-inclusive)
+  Parameters: The max number to set the range of random numbers.
+  Returns: The random number.
   */
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+//Classes
+
 // Board class
-/*
-This class serves as the 2048 board. It contains a 2D array of Square objects
-that represents squares on the board. It contains class methods to update the
-board as moves are performed, to add new squares to be added to the board, etc.
-*/
 class Board {
+  /*
+  This class serves as the 2048 board. It contains a 2D array of Square objects
+  that represents squares on the board. It contains class methods to update the
+  board as moves are performed, to add new squares to be added to the board, etc.
+  */
 
   // Constructor - instantiate board array
   constructor(boardSize) {
@@ -47,7 +49,6 @@ class Board {
     Parameters: None
     Returns: A boolean value representing whether or not the board changed.
     */
-    console.log("here");
     var BOARD_CHANGED = false;
 		for (var x = 0; x < (this.board.length); x++) {
 			for (var y = this.board.length - 1; y > 0; y--) {
@@ -219,14 +220,14 @@ class Square {
   */
 
   constructor () {
-    this.values = [0,2,4]; ///// fix this - FIND OUT HOW TO CALL ONE METHOD INSIDE ANOTHER
-    this.value = this.values[getRandomInt(3)]; //getRandVal(); fix this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    this.values = [0,2,4];
+    this.value = this.values[getRandomInt(3)];
   }
 
   // Determine the random value of a Square object when it is created
   setRandVal(){
-    this.values = [0,2,4]; ///// fix this - FIND OUT HOW TO CALL ONE METHOD INSIDE ANOTHER
-    this.value = this.values[getRandomInt(3)];  /// FIND OUT HOW TO USE THIS CODE ABOVE!!!!!!!!!!!!!
+    this.values = [0,2,4];
+    this.value = this.values[getRandomInt(3)];
   }
 
   // Getter
